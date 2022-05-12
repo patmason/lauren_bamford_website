@@ -7,5 +7,5 @@
 // You can delete this file if you're not using it
 
 import "normalize.css"
-import "./src/global_styles/global.scss"
-import "./src/global_styles/typography.scss"
+import "./src/styles/global_styles/global.scss"
+import "./src/styles/global_styles/typography.scss"
