@@ -1,0 +1,45 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-size: inherit;
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+button,
+input,
+select,
+textarea {
+  color: inherit;
+  font-family: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  border: none;
+  border-radius: 0;
+  border-style: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: 0;
+  box-shadow: 0;
+}
+
+//Setting height to 100%
+// html, body, #___gatsby, #gatsby-focus-wrapper {
+//   height: 100%;
+// }
+
+//Focus Outline
+a:focus,
+button:focus,
+*:focus {
+  outline: none;
+}

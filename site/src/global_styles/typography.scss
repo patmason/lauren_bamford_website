@@ -1,0 +1,22 @@
+@font-face {
+  font-family: "Quadrant-Mono";
+  src: url("../fonts/QuadrantTextMonoTrial-Regular.woff") format("woff");
+  font-style: normal;
+  font-weight: normal;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--blackFont);
+  color: white;
+}
+
+html {
+  --blackFont: #272727;
+  font-family: "Quadrant-Mono", "Courier New", Courier, monospace;
+  color: var(--blackFont);
+}
