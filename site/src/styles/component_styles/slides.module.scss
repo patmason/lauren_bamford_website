@@ -1,0 +1,27 @@
+.slides_wrapper {
+  // background-color: brown;
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.slide_wrapper {
+  // background-color: lightblue;
+  position: absolute;
+}
+
+.buttons {
+  // background-color: rgba(152, 251, 152, 0.416);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
+
+.button {
+  height: 100%;
+  width: 50%;
+}

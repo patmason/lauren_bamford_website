@@ -10,7 +10,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 
 gsap.registerPlugin(Flip)
 
-const Intro = ({ intro, setIntro, images }) => {
+const Intro = ({ intro, setIntro, images, current }) => {
   const introWrapperRef = useRef(null)
   const [flipImage, setFlipImage] = useState(false)
   const q = gsap.utils.selector(introWrapperRef)
@@ -83,13 +83,19 @@ const Intro = ({ intro, setIntro, images }) => {
           className={styles.intro_fullscreen_image}
           style={{
             minWidth: `calc(100vh * ${
-              images[0].image.asset.width / images[0].image.asset.height
+              images[current === 0 ? images.length - 1 : current - 1].image
+                .asset.width /
+              images[current === 0 ? images.length - 1 : current - 1].image
+                .asset.height
             })`,
           }}
         >
           <GatsbyImage
-            image={images[0].image.asset.gatsbyImageData}
-            alt={images[0].client}
+            image={
+              images[current === 0 ? images.length - 1 : current - 1].image
+                .asset.gatsbyImageData
+            }
+            alt={images[current === 0 ? images.length - 1 : current - 1].client}
           />
         </div>
         <div
@@ -102,19 +108,21 @@ const Intro = ({ intro, setIntro, images }) => {
             !flipImage
               ? {
                   minWidth: `calc(100vh * ${
-                    images[1].image.asset.width / images[1].image.asset.height
+                    images[current].image.asset.width /
+                    images[current].image.asset.height
                   })`,
                 }
               : {
                   width: `calc(70vh * ${
-                    images[1].image.asset.width / images[1].image.asset.height
+                    images[current].image.asset.width /
+                    images[current].image.asset.height
                   })`,
                 }
           }
         >
           <GatsbyImage
-            image={images[1].image.asset.gatsbyImageData}
-            alt={images[1].client}
+            image={images[current].image.asset.gatsbyImageData}
+            alt={images[current].client}
           />
         </div>
       </div>

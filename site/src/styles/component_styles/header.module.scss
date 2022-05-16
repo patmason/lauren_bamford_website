@@ -1,6 +1,7 @@
 .header {
   // background-color: lightcoral;
   position: fixed;
+  top: 0;
   width: calc(100% - (var(--nav_padding) * 2));
   padding: var(--nav_padding) var(--nav_padding) 0 var(--nav_padding);
   display: flex;
@@ -9,6 +10,7 @@
   flex-wrap: wrap;
   text-transform: uppercase;
   color: white;
+  z-index: 1000;
 }
 
 .header_item {
