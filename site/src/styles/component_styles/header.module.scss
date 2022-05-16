@@ -1,0 +1,26 @@
+.header {
+  // background-color: lightcoral;
+  position: fixed;
+  width: calc(100% - (var(--nav_padding) * 2));
+  padding: var(--nav_padding) var(--nav_padding) 0 var(--nav_padding);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  text-transform: uppercase;
+  color: white;
+}
+
+.header_item {
+  // background-color: lightgreen;
+  white-space: nowrap;
+  width: 25%;
+  min-width: max-content;
+}
+
+//Mobile styles
+@media (max-width: var(--mobile)), (orientation: portrait) {
+  .header_item {
+    width: 50%;
+  }
+}
