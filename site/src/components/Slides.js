@@ -36,6 +36,27 @@ function getImageStyles(image, current, index) {
 const Slides = ({ images, current, handleNext, handlePrev }) => {
   return (
     <div className={styles.slides_wrapper}>
+      <div
+        className={`${styles.slide_wrapper} slide`}
+        key={`${images[images.length - 1].image.asset.assetId}_looper`}
+        data-flip-id={`${images[images.length - 1].image.asset.assetId}_looper`}
+        style={
+          current === 0
+            ? {
+                minWidth: `calc(100vh * (${
+                  images[images.length - 1].image.asset.width
+                } / ${images[images.length - 1].image.asset.height})`,
+              }
+            : {
+                display: "none",
+              }
+        }
+      >
+        <GatsbyImage
+          image={images[images.length - 1].image.asset.gatsbyImageData}
+          alt={images[images.length - 1].client}
+        />
+      </div>
       {images.map((node, index) => {
         return (
           <div
@@ -44,6 +65,7 @@ const Slides = ({ images, current, handleNext, handlePrev }) => {
             } slide`}
             key={node.image.asset.assetId}
             style={getImageStyles(node.image, current, index)}
+            data-flip-id={node.image.asset.assetId}
           >
             <GatsbyImage
               image={node.image.asset.gatsbyImageData}
@@ -52,6 +74,32 @@ const Slides = ({ images, current, handleNext, handlePrev }) => {
           </div>
         )
       })}
+      <div
+        className={`${styles.slide_wrapper} slide`}
+        key={`${images[0].image.asset.assetId}_looper`}
+        data-flip-id={`${images[0].image.asset.assetId}_looper`}
+        style={
+          current === images.length
+            ? {
+                width: `calc(70vh * (${images[0].image.asset.width} / ${images[0].image.asset.height})`,
+                maxWidth: `80%`,
+                zIndex: 1,
+              }
+            : current === 0
+            ? {
+                display: "none",
+              }
+            : {
+                width: `0`,
+                zIndex: 2,
+              }
+        }
+      >
+        <GatsbyImage
+          image={images[0].image.asset.gatsbyImageData}
+          alt={images[0].client}
+        />
+      </div>
       <div className={styles.buttons}>
         <button
           className={`${styles.button} ${styles.prev_button}`}

@@ -1,0 +1,29 @@
+.footer {
+  // background-color: lightcoral;
+  position: fixed;
+  bottom: 0;
+  width: calc(100% - (var(--nav_padding) * 2));
+  padding: var(--nav_padding);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  text-transform: uppercase;
+  color: white;
+  mix-blend-mode: difference;
+  z-index: 1000;
+}
+
+.footer_item {
+  // background-color: lightgreen;
+  white-space: nowrap;
+  width: 25%;
+  min-width: max-content;
+}
+
+//Mobile styles
+@media (max-width: var(--mobile)), (orientation: portrait) {
+  .footer_item {
+    width: 50%;
+  }
+}
