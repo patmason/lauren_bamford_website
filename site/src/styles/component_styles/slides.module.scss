@@ -1,11 +1,19 @@
 .slides_wrapper {
-  // background-color: brown;
+  background-color: brown;
   position: relative;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+}
+
+//react transtion test
+.slides_wrapper {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 0;
 }
 
 .slide_wrapper {

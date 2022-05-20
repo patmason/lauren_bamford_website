@@ -5,3 +5,7 @@
  */
 
 // You can delete this file if you're not using it
+//Fixes SSR rehydration issue
+exports.replaceRenderer = ({ replaceBodyHTMLString }) => {
+  replaceBodyHTMLString('<div id="SSR_wrapper"></div>')
+}

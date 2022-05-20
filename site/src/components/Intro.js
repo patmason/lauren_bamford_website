@@ -10,7 +10,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 
 gsap.registerPlugin(Flip)
 
-const Intro = ({ intro, setIntro, images, current }) => {
+const Intro = ({ intro, images, current, dispatch, ACTIONS }) => {
   const introWrapperRef = useRef(null)
   const [flipImage, setFlipImage] = useState(false)
   const q = gsap.utils.selector(introWrapperRef)
@@ -67,12 +67,11 @@ const Intro = ({ intro, setIntro, images, current }) => {
 
   useLayoutEffect(() => {
     if (!flipImage) return
-    console.log("fllip", flipState.current)
     Flip.from(flipState.current, {
       duration: 0.75,
       absolute: true,
       ease: "expo.inOut",
-      onComplete: () => setIntro(false),
+      onComplete: () => dispatch({ type: ACTIONS.FINISH_INTRO }),
     })
   }, [flipImage])
 

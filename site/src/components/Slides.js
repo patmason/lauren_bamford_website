@@ -37,7 +37,7 @@ const Slides = ({ images, current, handleNext, handlePrev }) => {
   return (
     <div className={styles.slides_wrapper}>
       <div
-        className={`${styles.slide_wrapper} slide`}
+        className={`${styles.slide_wrapper} slide flip_slide`}
         key={`${images[images.length - 1].image.asset.assetId}_looper`}
         data-flip-id={`${images[images.length - 1].image.asset.assetId}_looper`}
         style={
@@ -61,8 +61,15 @@ const Slides = ({ images, current, handleNext, handlePrev }) => {
         return (
           <div
             className={`${styles.slide_wrapper} ${
-              index === current ? "current_slide" : ""
-            } slide`}
+              index === current ? "current_slide current" : ""
+            } slide ${
+              //class to only target current front and back slides to flip
+              index === current ||
+              index === current - 1 ||
+              index === current + 1
+                ? "flip_slide"
+                : ""
+            }`}
             key={node.image.asset.assetId}
             style={getImageStyles(node.image, current, index)}
             data-flip-id={node.image.asset.assetId}
@@ -75,7 +82,7 @@ const Slides = ({ images, current, handleNext, handlePrev }) => {
         )
       })}
       <div
-        className={`${styles.slide_wrapper} slide`}
+        className={`${styles.slide_wrapper} slide flip_slide`}
         key={`${images[0].image.asset.assetId}_looper`}
         data-flip-id={`${images[0].image.asset.assetId}_looper`}
         style={

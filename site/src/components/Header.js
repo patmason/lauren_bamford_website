@@ -4,7 +4,7 @@ import gsap from "gsap"
 //styles
 import * as styles from "../styles/component_styles/header.module.scss"
 
-const Header = () => {
+const Header = ({ handleViewChange, view }) => {
   const headerRef = useRef(null)
   const q = gsap.utils.selector(headerRef)
   useLayoutEffect(() => {
@@ -24,7 +24,9 @@ const Header = () => {
         <button>{`[ ]`} &nbsp;image details</button>
       </span>
       <span className={`${styles.header_item} header_button`}>
-        <button>{`[ ]`} &nbsp;thumbs</button>
+        <button onClick={handleViewChange}>
+          {view === "grid" ? `[•]` : `[ ]`} &nbsp;thumbs
+        </button>
       </span>
     </header>
   )

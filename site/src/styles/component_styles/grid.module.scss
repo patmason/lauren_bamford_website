@@ -1,0 +1,28 @@
+.grid_wrapper {
+  // background-color: palevioletred;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  // height: 100vh;
+  padding: 1.8rem var(--nav_padding);
+  grid-gap: 1rem;
+  // overflow-y: scroll;
+}
+
+.grid_image_wrapper {
+  width: 100%;
+  height: max-content;
+  z-index: 2;
+}
+
+.grid_bg_image_wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
