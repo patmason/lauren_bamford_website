@@ -16,12 +16,13 @@ export default {
     {
       name: "projectInfo",
       title: "Project Info",
-      type: "string",
+      type: "text",
     },
     {
       name: "credits",
       title: "Credits",
-      type: "string",
+      type: "array",
+      of: [{ type: "string" }],
     },
   ],
 };
