@@ -6,7 +6,7 @@ import { Flip } from "gsap/Flip"
 //Styles
 import * as styles from "../styles/component_styles/grid.module.scss"
 
-const Grid = ({ images, current, dispatch, ACTIONS }) => {
+const Grid = ({ images, current, dispatch, ACTIONS, background }) => {
   const [isSelected, setIsSelected] = useState(false)
   const [selectedImage, setSelectedImage] = useState(current)
   const gridRef = useRef()
@@ -22,7 +22,7 @@ const Grid = ({ images, current, dispatch, ACTIONS }) => {
       scale: 0,
       delay: 0.5,
       duration: 1,
-      stagger: 0.1,
+      // stagger: 0.1,
       ease: "expo.inOut",
     })
   }, [])
@@ -35,7 +35,7 @@ const Grid = ({ images, current, dispatch, ACTIONS }) => {
       y: 200,
       scale: 0,
       duration: 1,
-      stagger: 0.1,
+      // stagger: 0.1,
       ease: "expo.inOut",
       onComplete: () => {
         dispatch({
@@ -73,6 +73,12 @@ const Grid = ({ images, current, dispatch, ACTIONS }) => {
           </div>
         )
       })}
+      <div
+        className={`${styles.background} ${
+          background === "photo" ? styles.background_photo : ""
+        } ${background === "white" ? styles.background_white : ""}
+        ${background === "black" ? styles.background_black : ""}`}
+      ></div>
       <div className={styles.grid_bg_image_wrapper}>
         <div
           className={styles.grid_bg_image}

@@ -7,6 +7,14 @@ html {
   background-color: rgb(255, 255, 255);
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  scrollbar-width: none;
+}
+
 h1,
 h2,
 h3,

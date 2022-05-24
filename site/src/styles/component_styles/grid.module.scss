@@ -1,18 +1,19 @@
 .grid_wrapper {
-  // background-color: palevioletred;
+  // background-color: rgb(255, 60, 0);
   position: relative;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   // height: 100vh;
   padding: 1.8rem var(--nav_padding);
   grid-gap: 1rem;
   // overflow-y: scroll;
+  z-index: 4;
 }
 
 .grid_image_wrapper {
   width: 100%;
   height: max-content;
-  z-index: 2;
+  z-index: 3;
 }
 
 .grid_bg_image_wrapper {
@@ -25,4 +26,29 @@
   align-items: center;
   justify-content: center;
   z-index: 1;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background ease-in-out 0.75s;
+  z-index: 2;
+}
+
+.background_white {
+  background: rgb(255, 255, 255);
+}
+
+.background_black {
+  background: rgb(1, 1, 1);
+}
+
+.background_photo {
+  background: none;
 }

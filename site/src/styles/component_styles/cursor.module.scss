@@ -1,0 +1,25 @@
+.cursor,
+.cursor_content {
+  pointer-events: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  z-index: 10000;
+}
+
+.cursor {
+  width: 8px;
+  height: 8px;
+  background-color: rgb(239, 105, 15);
+  border-radius: 50%;
+}
+
+.cursor_content {
+  background-color: rgb(197, 246, 62);
+  padding: 0.3em;
+  border-radius: 0.3em;
+  width: max-content;
+  transition: width 0.3s ease-in-out;
+}

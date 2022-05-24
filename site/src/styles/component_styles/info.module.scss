@@ -1,0 +1,22 @@
+.info_wrapper {
+  background-color: peru;
+  position: absolute;
+  width: calc(100% - (var(--nav_padding) * 2));
+  padding: 2em var(--nav_padding) var(--nav_padding) var(--nav_padding);
+}
+
+.image_detail_wrapper,
+.about_wrapper {
+  background-color: lemonchiffon;
+  display: flex;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.info_item {
+  white-space: nowrap;
+  width: 25%;
+  min-width: max-content;
+}

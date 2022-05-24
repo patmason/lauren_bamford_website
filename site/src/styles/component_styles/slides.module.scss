@@ -1,11 +1,14 @@
 .slides_wrapper {
-  background-color: brown;
+  // background-color: brown;
   position: relative;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  &.zoomed {
+    z-index: 10000;
+  }
 }
 
 //react transtion test
@@ -22,7 +25,7 @@
 }
 
 .buttons {
-  // background-color: rgba(152, 251, 152, 0.416);
+  // background-color: rgb(255, 255, 255);
   position: absolute;
   height: 100%;
   width: 100%;
@@ -32,4 +35,24 @@
 .button {
   height: 100%;
   width: 50%;
+}
+
+.background {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+  transition: background ease-in-out 0.75s;
+}
+
+.background_white {
+  background: rgb(255, 255, 255);
+}
+
+.background_black {
+  background: rgb(1, 1, 1);
+}
+
+.background_photo {
+  background: none;
 }

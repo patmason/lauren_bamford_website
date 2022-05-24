@@ -112,7 +112,7 @@ const Intro = ({ intro, images, current, dispatch, ACTIONS }) => {
                   })`,
                 }
               : {
-                  width: `calc(70vh * ${
+                  width: `calc(75vh * ${
                     images[current].image.asset.width /
                     images[current].image.asset.height
                   })`,

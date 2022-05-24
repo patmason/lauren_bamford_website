@@ -17,6 +17,8 @@ import Header from "../components/Header"
 import Slides from "../components/Slides"
 import Grid from "../components/Grid"
 import Footer from "../components/Footer"
+import Info from "../components/Info"
+import Cursor from "../components/Cursor"
 
 //styles
 import * as styles from "../styles/component_styles/index.module.scss"
@@ -41,6 +43,8 @@ const ACTIONS = {
   SHOW_GRID: "show_grid",
   SHOW_SLIDES: "show_slides",
   SELECT_FROM_GRID: "select_from_grid",
+  CHANGE_BACKGROUND: "change_background",
+  UPDATE_CURSOR: "update_cursor",
 }
 
 function reducer(state, action) {
@@ -88,6 +92,16 @@ function reducer(state, action) {
         ),
         flipState: action.payload.flipState,
       }
+    case ACTIONS.CHANGE_BACKGROUND:
+      return {
+        ...state,
+        background: action.payload.background,
+      }
+    case ACTIONS.UPDATE_CURSOR:
+      return {
+        ...state,
+        cursorContent: action.payload.cursorContent,
+      }
   }
 }
 
@@ -97,6 +111,8 @@ const IndexPage = () => {
       allSanityPhoto {
         nodes {
           client
+          projectInfo
+          credits
           image {
             asset {
               gatsbyImageData
@@ -118,6 +134,8 @@ const IndexPage = () => {
     view: "slides",
     flipState: null,
     intro: true,
+    background: "photo",
+    cursorContent: "FOO",
   }
   const [state, dispatch] = useReducer(reducer, initialState)
 
@@ -143,7 +161,7 @@ const IndexPage = () => {
     dispatch({
       type: state.view === "slides" ? ACTIONS.SHOW_GRID : ACTIONS.SHOW_SLIDES,
       payload: {
-        flipState: Flip.getState(q(".current")),
+        flipState: Flip.getState(q(".current_slide")),
       },
     })
   }
@@ -160,10 +178,10 @@ const IndexPage = () => {
 
   //Slide change effect
   useLayoutEffect(() => {
-    if (!state.flipState) return
+    if (!state.flipState || state.background !== "photo") return
     Flip.from(state.flipState, {
       absolute: true,
-      duration: 1,
+      duration: 0.75,
       ease: "expo.inOut",
     })
   }, [state.current])
@@ -171,11 +189,12 @@ const IndexPage = () => {
   //View change effect
   useLayoutEffect(() => {
     if (!state.flipState) return
+    console.log("view change")
     Flip.from(state.flipState, {
       targets:
         state.view === "slides" ? q(".current_slide") : q(".grid_current"),
       scale: true,
-      duration: 1,
+      duration: 0.75,
       ease: "expo.inOut",
     })
   }, [state.view])
@@ -184,6 +203,7 @@ const IndexPage = () => {
     <>
       <Seo title="Home" />
       <div className={styles.app_wrapper} ref={appRef}>
+        <Cursor content={state.cursorContent} />
         {!state.intro ? (
           <Header handleViewChange={handleViewChange} view={state.view} />
         ) : null}
@@ -202,9 +222,19 @@ const IndexPage = () => {
             current={state.current}
             dispatch={dispatch}
             ACTIONS={ACTIONS}
+            background={state.background}
           />
         ) : null}
-        <Transition
+        <Slides
+          images={state.images}
+          current={state.current}
+          dispatch={dispatch}
+          ACTIONS={ACTIONS}
+          handleNext={handleNext}
+          handlePrev={handlePrev}
+          background={state.background}
+        />
+        {/* <Transition
           in={state.view === "slides"}
           timeout={2000}
           mountOnEnter={true}
@@ -217,11 +247,20 @@ const IndexPage = () => {
               current={state.current}
               handleNext={handleNext}
               handlePrev={handlePrev}
+              background={state.background}
             />
           )}
-        </Transition>
-        {}
-        {!state.intro ? <Footer /> : null}
+        </Transition> */}
+        {!state.intro ? (
+          <Info images={state.images} current={state.current} />
+        ) : null}
+        {!state.intro ? (
+          <Footer
+            background={state.background}
+            dispatch={dispatch}
+            ACTIONS={ACTIONS}
+          />
+        ) : null}
       </div>
     </>
   )
