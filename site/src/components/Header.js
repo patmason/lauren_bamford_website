@@ -4,7 +4,14 @@ import gsap from "gsap"
 //styles
 import * as styles from "../styles/component_styles/header.module.scss"
 
-const Header = ({ handleViewChange, view }) => {
+const Header = ({
+  handleViewChange,
+  view,
+  dispatch,
+  ACTIONS,
+  showInfo,
+  showImageDetails,
+}) => {
   const headerRef = useRef(null)
   const q = gsap.utils.selector(headerRef)
   useLayoutEffect(() => {
@@ -18,10 +25,26 @@ const Header = ({ handleViewChange, view }) => {
         <h1>Lauren Bamford</h1>
       </span>
       <span className={`${styles.header_item} header_button`}>
-        <button>{`[•]`} &nbsp;info</button>
+        <button
+          onClick={() =>
+            dispatch({
+              type: ACTIONS.TOGGLE_INFO,
+            })
+          }
+        >
+          {showInfo ? `[•]` : `[ ]`} &nbsp;info
+        </button>
       </span>
       <span className={`${styles.header_item} header_button`}>
-        <button>{`[ ]`} &nbsp;image details</button>
+        <button
+          onClick={() =>
+            dispatch({
+              type: ACTIONS.TOGGLE_IMAGE_DETAILS,
+            })
+          }
+        >
+          {showImageDetails ? `[•]` : `[ ]`} &nbsp;image details
+        </button>
       </span>
       <span className={`${styles.header_item} header_button`}>
         <button onClick={handleViewChange}>

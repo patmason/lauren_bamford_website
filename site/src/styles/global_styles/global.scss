@@ -2,7 +2,7 @@ html {
   --mobile: 800px;
   --nav_padding: 5px;
   --blackFont: #272727;
-  --fontSize: 15px;
+  --fontSize: 18px;
   // line-height: 0;
   background-color: rgb(255, 255, 255);
 }
@@ -56,9 +56,17 @@ textarea {
 }
 
 //Setting height to 100%
-// html, body, #___gatsby, #gatsby-focus-wrapper {
-//   height: 100%;
-// }
+html,
+body,
+#___gatsby,
+#gatsby-focus-wrapper {
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
 //Focus Outline
 a:focus,

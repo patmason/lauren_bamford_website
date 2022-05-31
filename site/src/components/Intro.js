@@ -27,7 +27,7 @@ const Intro = ({ intro, images, current, dispatch, ACTIONS }) => {
       })
       .to(q(`.first_item`), {
         opacity: 1,
-        delay: 1,
+        delay: 0.5,
         duration: 1,
       })
       .to(q(`.second_item`), {

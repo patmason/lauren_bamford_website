@@ -20,7 +20,7 @@ const Grid = ({ images, current, dispatch, ACTIONS, background }) => {
       opacity: 0,
       y: 200,
       scale: 0,
-      delay: 0.5,
+      delay: 0.75,
       duration: 1,
       // stagger: 0.1,
       ease: "expo.inOut",

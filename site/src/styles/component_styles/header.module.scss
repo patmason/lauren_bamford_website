@@ -8,6 +8,7 @@
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
+  column-gap: 1em;
   text-transform: uppercase;
   color: rgb(255, 255, 255);
   z-index: 1000;
@@ -15,15 +16,14 @@
 }
 
 .header_item {
-  // background-color: lightgreen;
   white-space: nowrap;
-  width: 25%;
+  width: calc(25% - 1em);
   min-width: max-content;
 }
 
 //Mobile styles
 @media (max-width: var(--mobile)), (orientation: portrait) {
   .header_item {
-    width: 50%;
+    width: calc(50% - 1em);
   }
 }

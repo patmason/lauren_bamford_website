@@ -13,5 +13,10 @@ export default {
       title: "Agent Region",
       type: "string",
     },
+    {
+      name: "agentLink",
+      title: "Agency Website Link",
+      type: "string",
+    },
   ],
 };

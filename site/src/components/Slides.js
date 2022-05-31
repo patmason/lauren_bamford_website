@@ -105,40 +105,49 @@ const Slides = ({
         </div>
       ) : null}
       {images.map((node, index) => {
-        return (
-          <div
-            className={`${styles.slide_wrapper} ${
-              index === current ? "current_slide current" : ""
-            } slide ${
-              //class to only target current, front and back slides to flip
-              index === current ||
-              index === current - 1 ||
-              index === current + 1
-                ? "flip_slide"
-                : ""
-            }`}
-            onClick={index === current ? () => handleZoom() : null}
-            onMouseOver={
-              index === current
-                ? () =>
-                    dispatch({
-                      type: ACTIONS.UPDATE_CURSOR,
-                      payload: {
-                        cursorContent: `${zoom === false ? `ZOOM` : `CLOSE`}`,
-                      },
-                    })
-                : null
-            }
-            key={node.image.asset.assetId}
-            style={getImageStyles(node.image, current, index, zoom)}
-            data-flip-id={node.image.asset.assetId}
-          >
-            <GatsbyImage
-              image={node.image.asset.gatsbyImageData}
-              alt={node.client}
-            />
-          </div>
-        )
+        if (
+          index === current ||
+          index === current + 1 ||
+          index === current - 1 ||
+          index === current + 2 ||
+          index === current - 2
+        ) {
+          return (
+            <div
+              className={`${styles.slide_wrapper} ${
+                index === current ? "current_slide current" : ""
+              } slide ${
+                //class to only target current, front and back slides to flip
+                index === current ||
+                index === current - 1 ||
+                index === current + 1
+                  ? "flip_slide"
+                  : ""
+              }`}
+              onClick={index === current ? () => handleZoom() : null}
+              // onMouseOver={
+              //   index === current
+              //     ? () =>
+              //         dispatch({
+              //           type: ACTIONS.UPDATE_CURSOR,
+              //           payload: {
+              //             cursorContent: `${zoom === false ? `ZOOM` : `CLOSE`}`,
+              //           },
+              //         })
+              //     : null
+              // }
+              key={node.image.asset.assetId}
+              style={getImageStyles(node.image, current, index, zoom)}
+              data-flip-id={node.image.asset.assetId}
+            >
+              <GatsbyImage
+                image={node.image.asset.gatsbyImageData}
+                alt={node.client}
+                loading={"lazy"}
+              />
+            </div>
+          )
+        } else return null
       })}
       {background === "photo" ? (
         <div
@@ -178,22 +187,22 @@ const Slides = ({
         <button
           className={`${styles.button} ${styles.prev_button}`}
           onClick={() => handlePrev()}
-          onMouseEnter={() =>
-            dispatch({
-              type: ACTIONS.UPDATE_CURSOR,
-              payload: { cursorContent: `${current} / ${images.length - 1}` },
-            })
-          }
+          // onMouseEnter={() =>
+          //   dispatch({
+          //     type: ACTIONS.UPDATE_CURSOR,
+          //     payload: { cursorContent: `${current} / ${images.length - 1}` },
+          //   })
+          // }
         ></button>
         <button
           className={`${styles.button} ${styles.next_button}`}
           onClick={() => handleNext()}
-          onMouseEnter={() =>
-            dispatch({
-              type: ACTIONS.UPDATE_CURSOR,
-              payload: { cursorContent: `${current} / ${images.length - 1}` },
-            })
-          }
+          // onMouseEnter={() =>
+          //   dispatch({
+          //     type: ACTIONS.UPDATE_CURSOR,
+          //     payload: { cursorContent: `${current} / ${images.length - 1}` },
+          //   })
+          // }
         ></button>
       </div>
     </div>

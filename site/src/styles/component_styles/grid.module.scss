@@ -1,12 +1,14 @@
 .grid_wrapper {
-  // background-color: rgb(255, 60, 0);
-  position: relative;
+  background-color: rgba(255, 60, 0, 0);
+  position: fixed;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  // height: 100vh;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 300px));
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  height: calc(100% - 4rem);
+  // width: 100%;
   padding: 1.8rem var(--nav_padding);
-  grid-gap: 1rem;
-  // overflow-y: scroll;
+  grid-gap: 2vw;
+  overflow-y: scroll;
   z-index: 4;
 }
 
@@ -20,25 +22,27 @@
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1;
+  pointer-events: none;
 }
 
 .background {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background ease-in-out 0.75s;
   z-index: 2;
+  pointer-events: none;
 }
 
 .background_white {
@@ -51,4 +55,11 @@
 
 .background_photo {
   background: none;
+}
+
+//Mobile styles
+@media (max-width: var(--mobile)), (orientation: portrait) {
+  .grid_wrapper {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }

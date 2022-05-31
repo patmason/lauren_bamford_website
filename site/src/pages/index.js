@@ -44,6 +44,8 @@ const ACTIONS = {
   SHOW_SLIDES: "show_slides",
   SELECT_FROM_GRID: "select_from_grid",
   CHANGE_BACKGROUND: "change_background",
+  TOGGLE_INFO: "toggle_info",
+  TOGGLE_IMAGE_DETAILS: "toggle_image_details",
   UPDATE_CURSOR: "update_cursor",
 }
 
@@ -58,14 +60,14 @@ function reducer(state, action) {
       return {
         ...state,
         previous: state.current,
-        current: state.current === state.images.length ? 0 : state.current + 1,
+        current: action.payload.next,
         flipState: action.payload.flipState,
       }
     case ACTIONS.PREV_SLIDE:
       return {
         ...state,
         previous: state.current,
-        current: state.current === 0 ? state.images.length : state.current - 1,
+        current: action.payload.prev,
         flipState: action.payload.flipState,
       }
     case ACTIONS.SHOW_GRID:
@@ -97,6 +99,16 @@ function reducer(state, action) {
         ...state,
         background: action.payload.background,
       }
+    case ACTIONS.TOGGLE_INFO:
+      return {
+        ...state,
+        showInfo: !state.showInfo,
+      }
+    case ACTIONS.TOGGLE_IMAGE_DETAILS:
+      return {
+        ...state,
+        showImageDetails: !state.showImageDetails,
+      }
     case ACTIONS.UPDATE_CURSOR:
       return {
         ...state,
@@ -106,7 +118,7 @@ function reducer(state, action) {
 }
 
 const IndexPage = () => {
-  const imageData = useStaticQuery(graphql`
+  const data = useStaticQuery(graphql`
     {
       allSanityPhoto {
         nodes {
@@ -115,7 +127,7 @@ const IndexPage = () => {
           credits
           image {
             asset {
-              gatsbyImageData
+              gatsbyImageData(width: 3000)
               width
               height
               assetId
@@ -123,11 +135,23 @@ const IndexPage = () => {
           }
         }
       }
+      sanityInfo {
+        selectClients
+        phoneNumber
+        instagram
+        emailAddress
+        agents {
+          agentContact
+          agentRegion
+          agentLink
+        }
+        about
+      }
     }
   `)
 
   const initialState = {
-    images: [...imageData.allSanityPhoto.nodes],
+    images: [...data.allSanityPhoto.nodes],
     current: 1,
     previous: 1,
     selected: 1,
@@ -135,6 +159,8 @@ const IndexPage = () => {
     flipState: null,
     intro: true,
     background: "photo",
+    showInfo: false,
+    showImageDetails: false,
     cursorContent: "FOO",
   }
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -144,16 +170,28 @@ const IndexPage = () => {
 
   //Event handlers
   const handleNext = () => {
+    let next
+    if (state.background !== "photo") {
+      next = state.current === state.images.length - 1 ? 0 : state.current + 1
+    } else if (state.background === "photo") {
+      next = state.current === state.images.length ? 0 : state.current + 1
+    }
     dispatch({
       type: ACTIONS.NEXT_SLIDE,
-      payload: { flipState: Flip.getState(q(".flip_slide")) },
+      payload: { flipState: Flip.getState(q(".flip_slide")), next: next },
     })
   }
 
   const handlePrev = () => {
+    let prev
+    if (state.background !== "photo") {
+      prev = state.current === 0 ? state.images.length - 1 : state.current - 1
+    } else if (state.background === "photo") {
+      prev = state.current === 0 ? state.images.length : state.current - 1
+    }
     dispatch({
       type: ACTIONS.PREV_SLIDE,
-      payload: { flipState: Flip.getState(q(".flip_slide")) },
+      payload: { flipState: Flip.getState(q(".flip_slide")), prev: prev },
     })
   }
 
@@ -182,7 +220,19 @@ const IndexPage = () => {
     Flip.from(state.flipState, {
       absolute: true,
       duration: 0.75,
+      toggleClass: "flipping",
       ease: "expo.inOut",
+      onComplete: () => {
+        // THIS IS A BIT DODGY
+        // console.log(prevRef.current);
+        if (
+          state.current === state.images.length &&
+          state.previous === state.images.length - 1
+        ) {
+          console.log("loop next")
+          handleNext()
+        }
+      },
     })
   }, [state.current])
 
@@ -203,9 +253,16 @@ const IndexPage = () => {
     <>
       <Seo title="Home" />
       <div className={styles.app_wrapper} ref={appRef}>
-        <Cursor content={state.cursorContent} />
+        {/* <Cursor content={state.cursorContent} /> */}
         {!state.intro ? (
-          <Header handleViewChange={handleViewChange} view={state.view} />
+          <Header
+            handleViewChange={handleViewChange}
+            view={state.view}
+            showInfo={state.showInfo}
+            showImageDetails={state.showImageDetails}
+            dispatch={dispatch}
+            ACTIONS={ACTIONS}
+          />
         ) : null}
         {state.intro ? (
           <Intro
@@ -251,8 +308,16 @@ const IndexPage = () => {
             />
           )}
         </Transition> */}
-        {!state.intro ? (
-          <Info images={state.images} current={state.current} />
+        {state.showInfo || state.showImageDetails ? (
+          <Info
+            images={state.images}
+            current={state.current}
+            info={data.sanityInfo}
+            dispatch={dispatch}
+            ACTIONS={ACTIONS}
+            showImageDetails={state.showImageDetails}
+            showInfo={state.showInfo}
+          />
         ) : null}
         {!state.intro ? (
           <Footer

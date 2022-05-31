@@ -1,7 +1,13 @@
+:global {
+  .flipping {
+    pointer-events: none;
+  }
+}
+
 .slides_wrapper {
   // background-color: brown;
   position: relative;
-  height: 100vh;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,7 +31,6 @@
 }
 
 .buttons {
-  // background-color: rgb(255, 255, 255);
   position: absolute;
   height: 100%;
   width: 100%;
@@ -35,6 +40,7 @@
 .button {
   height: 100%;
   width: 50%;
+  // cursor: none;
 }
 
 .background {
