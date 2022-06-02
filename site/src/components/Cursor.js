@@ -41,7 +41,7 @@ const Cursor = ({
   const [coords, setCoords] = useState({ x: 0, y: 0 })
   const [isVisible, setIsVisible] = useState(true)
   const [isActive, setIsActive] = useState(false)
-  const [content, setContent] = useState("DEFAULT CONTENT")
+  const [content, setContent] = useState("")
   let endX = useRef(0)
   let endY = useRef(0)
 
@@ -58,7 +58,7 @@ const Cursor = ({
       if (previousTimerRef.current !== undefined) {
         coords.x += (endX.current - coords.x) / 4
         coords.y += (endY.current - coords.y) / 4
-        cursorOuterRef.current.style.top = coords.y + 10 + "px"
+        cursorOuterRef.current.style.top = coords.y + 20 + "px"
         cursorOuterRef.current.style.left = coords.x + "px"
       }
       previousTimerRef.current = time

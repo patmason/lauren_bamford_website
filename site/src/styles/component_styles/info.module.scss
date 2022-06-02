@@ -7,7 +7,7 @@
   padding: var(--nav_padding);
   padding-top: 2.4em;
   overflow-y: scroll;
-  z-index: 99999;
+  z-index: 10;
   & ul {
     padding: 0;
   }
@@ -64,6 +64,7 @@
     background-color: white;
     height: 100%;
     padding-top: var(--nav_padding);
+    z-index: 99999;
   }
 
   .image_detail_wrapper,

@@ -16,23 +16,27 @@ const Grid = ({ images, current, dispatch, ACTIONS, background }) => {
 
   //enter effect
   useEffect(() => {
-    gsap.from(q(".not_current"), {
+    const inTween = gsap.from(q(".not_current"), {
       opacity: 0,
-      y: 200,
+      // y: 200,
       scale: 0,
       delay: 0.75,
       duration: 1,
       // stagger: 0.1,
       ease: "expo.inOut",
     })
+
+    return () => {
+      inTween.kill()
+    }
   }, [])
 
   //leave effect
   useEffect(() => {
     if (!isSelected) return
-    gsap.to(q(".not_current"), {
+    const outTween = gsap.to(q(".not_current"), {
       opacity: 0,
-      y: 200,
+      // y: 200,
       scale: 0,
       duration: 1,
       // stagger: 0.1,
@@ -47,6 +51,9 @@ const Grid = ({ images, current, dispatch, ACTIONS, background }) => {
         })
       },
     })
+    return () => {
+      outTween.kill()
+    }
   }, [isSelected])
 
   return (
