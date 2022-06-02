@@ -70,6 +70,7 @@ const Grid = ({ images, current, dispatch, ACTIONS, background }) => {
             <GatsbyImage
               image={node.image.asset.gatsbyImageData}
               alt={node.client || "Lauren Bamford Photography"}
+              loading={"lazy"}
             />
           </div>
         )
