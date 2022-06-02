@@ -23,11 +23,11 @@
   position: fixed;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(50px, 300px));
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   height: 100%;
   // width: 100%;
-  padding: 1.8rem var(--nav_padding);
-  grid-gap: 2vw;
+  padding: 2rem var(--nav_padding);
+  grid-gap: 2em;
   overflow-y: scroll;
   z-index: 4;
 }
@@ -83,5 +83,7 @@
 @media (max-width: var(--mobile)), (orientation: portrait) {
   .grid_wrapper {
     grid-template-columns: 1fr 1fr 1fr;
+    padding: 3.5rem var(--nav_padding);
+    grid-gap: var(--nav_padding);
   }
 }

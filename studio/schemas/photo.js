@@ -24,5 +24,12 @@ export default {
       type: "array",
       of: [{ type: "string" }],
     },
+    //order-documents plugin
+    {
+      name: "order",
+      title: "Order",
+      type: "number",
+      hidden: true,
+    },
   ],
 };

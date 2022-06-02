@@ -123,7 +123,7 @@ const IndexPage = () => {
   console.log("render")
   const data = useStaticQuery(graphql`
     {
-      allSanityPhoto {
+      allSanityPhoto(sort: { fields: order, order: ASC }) {
         nodes {
           client
           projectInfo

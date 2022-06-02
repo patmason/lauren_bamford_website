@@ -26,6 +26,7 @@
 @media (max-width: var(--mobile)), (orientation: portrait) {
   .footer_item {
     width: calc(50% - 1em);
+    margin-top: 0.3rem;
   }
 
   .right_align {
