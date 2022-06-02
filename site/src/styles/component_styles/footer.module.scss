@@ -2,7 +2,7 @@
   // background-color: lightcoral;
   position: fixed;
   bottom: 0;
-  width: calc(100% - (var(--nav_padding) * 2));
+  width: 100%;
   padding: var(--nav_padding);
   display: flex;
   flex-direction: row;
@@ -26,5 +26,9 @@
 @media (max-width: var(--mobile)), (orientation: portrait) {
   .footer_item {
     width: calc(50% - 1em);
+  }
+
+  .right_align {
+    text-align: right;
   }
 }

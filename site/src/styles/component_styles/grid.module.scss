@@ -1,10 +1,30 @@
+:global {
+  .app_wrapper_info {
+    .grid_wrapper {
+      filter: blur(20px);
+      opacity: 0.5;
+    }
+    :local .background_white,
+    :local .background_photo,
+    :local .background_black {
+      background-color: rgb(255, 255, 255);
+    }
+  }
+
+  .flipping {
+    pointer-events: none;
+  }
+}
+
 .grid_wrapper {
+  //This transition is for fade in of info. Remove if causes issues with gsap animations
+  transition: filter 0.75s ease-in-out, opacity 0.75s ease-in-out;
   background-color: rgba(255, 60, 0, 0);
   position: fixed;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(50px, 300px));
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  height: calc(100% - 4rem);
+  height: 100%;
   // width: 100%;
   padding: 1.8rem var(--nav_padding);
   grid-gap: 2vw;
@@ -16,6 +36,8 @@
   width: 100%;
   height: max-content;
   z-index: 3;
+  will-change: transform;
+  cursor: pointer;
 }
 
 .grid_bg_image_wrapper {

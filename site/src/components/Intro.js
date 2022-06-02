@@ -19,7 +19,7 @@ const Intro = ({ intro, images, current, dispatch, ACTIONS }) => {
 
   useLayoutEffect(() => {
     if (!intro) return
-    gsap.set(q(`.${styles.intro_header_item}`), { y: "49vh", opacity: 0 })
+    gsap.set(q(`.${styles.intro_header_item}`), { y: "45vh", opacity: 0 })
     gsap.set(q(`.intro_images_wrapper`), { opacity: 0 })
     tl.current = gsap
       .timeline({
@@ -94,7 +94,10 @@ const Intro = ({ intro, images, current, dispatch, ACTIONS }) => {
               images[current === 0 ? images.length - 1 : current - 1].image
                 .asset.gatsbyImageData
             }
-            alt={images[current === 0 ? images.length - 1 : current - 1].client}
+            alt={
+              images[current === 0 ? images.length - 1 : current - 1].client ||
+              "Lauren Bamford Photography"
+            }
           />
         </div>
         <div
@@ -121,7 +124,7 @@ const Intro = ({ intro, images, current, dispatch, ACTIONS }) => {
         >
           <GatsbyImage
             image={images[current].image.asset.gatsbyImageData}
-            alt={images[current].client}
+            alt={images[current].client || "Lauren Bamford Photography"}
           />
         </div>
       </div>

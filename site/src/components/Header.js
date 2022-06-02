@@ -24,7 +24,9 @@ const Header = ({
       <span className={`${styles.header_item}`}>
         <h1>Lauren Bamford</h1>
       </span>
-      <span className={`${styles.header_item} header_button`}>
+      <span
+        className={`${styles.header_item} ${styles.right_align} header_button`}
+      >
         <button
           onClick={() =>
             dispatch({
@@ -32,23 +34,32 @@ const Header = ({
             })
           }
         >
-          {showInfo ? `[•]` : `[ ]`} &nbsp;info
+          {showInfo ? `[•]` : `[ ]`} &nbsp;about
         </button>
       </span>
       <span className={`${styles.header_item} header_button`}>
         <button
-          onClick={() =>
-            dispatch({
-              type: ACTIONS.TOGGLE_IMAGE_DETAILS,
-            })
+          style={view === "grid" ? { cursor: "not-allowed" } : {}}
+          onClick={
+            view === "slides"
+              ? () =>
+                  dispatch({
+                    type: ACTIONS.TOGGLE_IMAGE_DETAILS,
+                  })
+              : null
           }
         >
-          {showImageDetails ? `[•]` : `[ ]`} &nbsp;image details
+          {showImageDetails ? `[•]` : `[ ]`} &nbsp;image info
         </button>
       </span>
-      <span className={`${styles.header_item} header_button`}>
-        <button onClick={handleViewChange}>
-          {view === "grid" ? `[•]` : `[ ]`} &nbsp;thumbs
+      <span
+        className={`${styles.header_item} ${styles.right_align} header_button`}
+      >
+        <button
+          style={view === "grid" ? { cursor: "not-allowed" } : {}}
+          onClick={view === "slides" ? handleViewChange : null}
+        >
+          {view === "grid" ? `[•]` : `[ ]`} &nbsp;index
         </button>
       </span>
     </header>

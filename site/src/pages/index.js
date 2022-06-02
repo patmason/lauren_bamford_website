@@ -103,10 +103,12 @@ function reducer(state, action) {
       return {
         ...state,
         showInfo: !state.showInfo,
+        showImageDetails: false,
       }
     case ACTIONS.TOGGLE_IMAGE_DETAILS:
       return {
         ...state,
+        showInfo: false,
         showImageDetails: !state.showImageDetails,
       }
     case ACTIONS.UPDATE_CURSOR:
@@ -118,6 +120,7 @@ function reducer(state, action) {
 }
 
 const IndexPage = () => {
+  console.log("render")
   const data = useStaticQuery(graphql`
     {
       allSanityPhoto {
@@ -252,7 +255,12 @@ const IndexPage = () => {
   return (
     <>
       <Seo title="Home" />
-      <div className={styles.app_wrapper} ref={appRef}>
+      <div
+        className={`${styles.app_wrapper} ${
+          state.showInfo || state.showImageDetails ? "app_wrapper_info" : ""
+        }`}
+        ref={appRef}
+      >
         {/* <Cursor content={state.cursorContent} /> */}
         {!state.intro ? (
           <Header
@@ -326,6 +334,7 @@ const IndexPage = () => {
             ACTIONS={ACTIONS}
           />
         ) : null}
+        {!state.intro ? <Cursor view={state.view} /> : null}
       </div>
     </>
   )

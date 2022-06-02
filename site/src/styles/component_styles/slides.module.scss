@@ -1,10 +1,24 @@
 :global {
+  .app_wrapper_info {
+    .slides_wrapper {
+      filter: blur(20px);
+      opacity: 0.5;
+    }
+    :local .background_white,
+    :local .background_photo,
+    :local .background_black {
+      background-color: rgb(255, 255, 255);
+    }
+  }
+
   .flipping {
     pointer-events: none;
   }
 }
 
 .slides_wrapper {
+  //This transition is for fade in of info. Remove if causes issues with gsap animations
+  transition: filter 0.75s ease-in-out, opacity 0.75s ease-in-out;
   // background-color: brown;
   position: relative;
   height: 100%;
@@ -43,6 +57,14 @@
   // cursor: none;
 }
 
+.next_button {
+  cursor: e-resize;
+}
+
+.prev_button {
+  cursor: w-resize;
+}
+
 .background {
   position: absolute;
   height: 100%;
@@ -61,4 +83,11 @@
 
 .background_photo {
   background: none;
+}
+
+//Mobile styles
+@media (max-width: var(--mobile)), (orientation: portrait) {
+  .slide_wrapper {
+    pointer-events: none;
+  }
 }

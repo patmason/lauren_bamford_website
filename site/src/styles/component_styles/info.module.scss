@@ -1,13 +1,13 @@
 .info_wrapper {
-  // background-color: rgba(216, 96, 96, 0.518);
-  height: calc(100% - (var(--nav_padding) * 2));
+  // background-color: antiquewhite;
+  color: rgb(0, 0, 0);
   position: absolute;
-  width: calc(100% - (var(--nav_padding) * 2));
+  height: 100%;
+  width: 100%;
   padding: var(--nav_padding);
-  color: rgb(255, 255, 255);
-  backdrop-filter: blur(5px) brightness(0.75);
-  // mix-blend-mode: difference;
-  z-index: 5;
+  padding-top: 2.4em;
+  overflow-y: scroll;
+  z-index: 99999;
   & ul {
     padding: 0;
   }
@@ -15,31 +15,28 @@
 
 .image_detail_wrapper,
 .about_wrapper {
-  // background-color: lemonchiffon;
+  // background-color: rgb(255, 255, 255);
+  position: absolute;
   display: flex;
+  // This width and height is added with padding because it is absolute positioned and needs this to line up with header and footer
+  width: calc(100% - (var(--nav_padding) * 2));
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
-  column-gap: 1em;
+  row-gap: 2em;
   opacity: 0;
-  // transition: opacity 0.5s ease-in-out;
+  pointer-events: none;
   &.visible {
     opacity: 1;
+    pointer-events: all;
   }
 }
 
-// .about_wrapper {
-//   color: black;
-//   // background-color: gainsboro;
-//   // padding: var(--nav_padding);
-//   border-radius: 0.3em;
-//   // width: 50%;
-//   & .info_item {
-//     padding: var(--nav_padding);
-//     background-color: gainsboro;
-//     width: calc(20% - 1em);
-//   }
-// }
+.image_detail_wrapper {
+  top: 50%;
+  transform: translateY(-50%);
+  // width: calc(100% - (var(--nav_padding) * 2));
+}
 
 .info_item {
   width: calc(25% - 1em);
@@ -50,7 +47,10 @@
 }
 
 .about {
-  max-width: 20em;
+  max-width: 25em;
+  p {
+    margin-bottom: 0;
+  }
 }
 
 .contact_info {
@@ -61,16 +61,42 @@
 //Mobile styles
 @media (max-width: var(--mobile)), (orientation: portrait) {
   .info_wrapper {
-    height: calc(100% - (var(--nav_padding) + 2em));
-    padding: 2em var(--nav_padding) var(--nav_padding) var(--nav_padding);
+    background-color: white;
+    height: 100%;
+    padding-top: var(--nav_padding);
   }
+
   .image_detail_wrapper,
   .about_wrapper {
-    margin-bottom: 1em;
+    // changing display is so that image details doesn't scroll because about section is overflowing
+    display: none;
+    &.visible {
+      display: flex;
+    }
+  }
+
+  .image_detail_wrapper {
+    // background-color: palegreen;
+    height: calc(100% - (var(--nav_padding) * 2));
+    & .close_button {
+      top: 0;
+      right: 0;
+    }
   }
 
   .info_item {
-    width: calc(50% - 1em);
-    margin-bottom: 1em;
+    width: 100%;
+  }
+
+  .about {
+    max-width: 100%;
+  }
+
+  .close_button {
+    color: orangered;
+    position: fixed;
+    width: max-content;
+    top: var(--nav_padding);
+    right: var(--nav_padding);
   }
 }

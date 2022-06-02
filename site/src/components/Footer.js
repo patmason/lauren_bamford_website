@@ -17,7 +17,9 @@ const Footer = ({ background, dispatch, ACTIONS }) => {
       <span className={`${styles.footer_item}`}>
         <h1>Background:</h1>
       </span>
-      <span className={`${styles.footer_item} footer_button`}>
+      <span
+        className={`${styles.footer_item} ${styles.right_align} footer_button`}
+      >
         <button
           onClick={() =>
             dispatch({
@@ -41,7 +43,9 @@ const Footer = ({ background, dispatch, ACTIONS }) => {
           {`${background === "white" ? `[•]` : `[ ]`}`} &nbsp;white
         </button>
       </span>
-      <span className={`${styles.footer_item} footer_button`}>
+      <span
+        className={`${styles.footer_item} ${styles.right_align} footer_button`}
+      >
         <button
           onClick={() =>
             dispatch({

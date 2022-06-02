@@ -12,9 +12,11 @@ const Info = ({
   showInfo,
 }) => {
   return (
-    <div className={styles.info_wrapper}>
-      <br />
-      <br />
+    <div
+      className={`${styles.info_wrapper} ${
+        showInfo || showImageDetails ? styles.visible : ""
+      }`}
+    >
       <div
         className={`${styles.about_wrapper} ${showInfo ? styles.visible : ""}`}
       >
@@ -25,14 +27,6 @@ const Info = ({
               return <p key={i}>{para}</p>
             })}
           </div>
-        </span>
-        <span className={styles.info_item}>
-          <h2 className={styles.info_heading}>SELECT CLIENTS</h2>
-          <ul className={styles.client_list}>
-            {info.selectClients.map(client => {
-              return <li key={client}>{client}</li>
-            })}
-          </ul>
         </span>
         <span className={styles.info_item}>
           <h2 className={styles.info_heading}>CONTACT</h2>
@@ -55,24 +49,30 @@ const Info = ({
             <br />
             <span>For commercial enquiries please contact:</span>
             <br />
-            {info.agents.map(agent => {
+            {info.agents.map((agent, index) => {
               return (
-                <>
-                  <span className={styles.agents} key={agent.agentContact}>
-                    <a
-                      href={agent.agentLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {`${agent.agentRegion.toUpperCase()}: ${agent.agentContact.toLowerCase()}`}
-                    </a>
-                  </span>
-                </>
+                <span className={styles.agents} key={index}>
+                  <a
+                    href={agent.agentLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {`${agent.agentRegion.toUpperCase()}: ${agent.agentContact.toLowerCase()}`}
+                  </a>
+                </span>
               )
             })}
           </div>
         </span>
         <span className={styles.info_item}>
+          <h2 className={styles.info_heading}>SELECT CLIENTS</h2>
+          <ul className={styles.client_list}>
+            {info.selectClients.map((client, index) => {
+              return <li key={index}>{client}</li>
+            })}
+          </ul>
+        </span>
+        <span className={`${styles.info_item} ${styles.close_button}`}>
           <button
             onClick={() =>
               dispatch({
@@ -109,17 +109,13 @@ const Info = ({
             <span>N / A</span>
           ) : (
             <ul>
-              {images[current].credits.map(credit => {
-                return (
-                  <li key={`${images[current].image.asset.assetId}_${credit}`}>
-                    {credit}
-                  </li>
-                )
+              {images[current].credits.map((credit, index) => {
+                return <li key={index}>{credit}</li>
               })}
             </ul>
           )}
         </span>
-        <span className={styles.info_item}>
+        <span className={`${styles.info_item} ${styles.close_button}`}>
           <button
             onClick={() =>
               dispatch({

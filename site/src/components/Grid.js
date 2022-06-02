@@ -15,7 +15,7 @@ const Grid = ({ images, current, dispatch, ACTIONS, background }) => {
     current === 0 ? images[images.length - 1] : images[current - 1]
 
   //enter effect
-  useLayoutEffect(() => {
+  useEffect(() => {
     gsap.from(q(".not_current"), {
       opacity: 0,
       y: 200,
@@ -50,7 +50,7 @@ const Grid = ({ images, current, dispatch, ACTIONS, background }) => {
   }, [isSelected])
 
   return (
-    <div className={styles.grid_wrapper} ref={gridRef}>
+    <div className={`${styles.grid_wrapper} grid_wrapper`} ref={gridRef}>
       {images.map((node, index) => {
         if (index === current - 1) return null
         if (current === 0 && index === images.length - 1) return null
@@ -60,6 +60,7 @@ const Grid = ({ images, current, dispatch, ACTIONS, background }) => {
               index === selectedImage ? "current grid_current" : "not_current"
             }`}
             key={node.image.asset.assetId}
+            data-cursor-content={(node.client || "N / A").toUpperCase()}
             data-flip-id={node.image.asset.assetId}
             onClick={() => {
               setIsSelected(true)
@@ -68,7 +69,7 @@ const Grid = ({ images, current, dispatch, ACTIONS, background }) => {
           >
             <GatsbyImage
               image={node.image.asset.gatsbyImageData}
-              alt={node.client}
+              alt={node.client || "Lauren Bamford Photography"}
             />
           </div>
         )
@@ -88,7 +89,7 @@ const Grid = ({ images, current, dispatch, ACTIONS, background }) => {
         >
           <GatsbyImage
             image={bg_image.image.asset.gatsbyImageData}
-            alt={bg_image.client}
+            alt={bg_image.client || "Lauren Bamford Photography"}
           />
         </div>
       </div>

@@ -8,24 +8,12 @@ import { GatsbyImage } from "gatsby-plugin-image"
 //Styles
 import * as styles from "../styles/component_styles/slides.module.scss"
 
-function getImageStyles(image, current, index, zoom) {
+function getImageStyles(image, current, index) {
   if (index === current) {
-    if (zoom) {
-      return {
-        minWidth: `calc(100vh * (${image.asset.width} / ${image.asset.height})`,
-        height: "100%",
-        top: 0,
-        left: 0,
-        zIndex: 100,
-        overflowY: "scroll",
-        scrollbarWidth: "none",
-      }
-    } else {
-      return {
-        width: `calc(75vh * (${image.asset.width} / ${image.asset.height})`,
-        maxWidth: `80%`,
-        zIndex: 1,
-      }
+    return {
+      width: `calc(75vh * (${image.asset.width} / ${image.asset.height})`,
+      maxWidth: `80%`,
+      zIndex: 1,
     }
   } else if (index === current - 2) {
     return {
@@ -62,13 +50,16 @@ const Slides = ({
   const q = gsap.utils.selector(slidesWrapperRef)
 
   function handleZoom() {
-    zoomFlipRef.current = Flip.getState(q(".current"))
+    zoomFlipRef.current = Flip.getState(
+      zoom ? q(".zoom_current") : q(".current")
+    )
     setZoom(zoom => !zoom)
   }
 
   useLayoutEffect(() => {
     if (!zoomFlipRef.current) return
     Flip.from(zoomFlipRef.current, {
+      targets: zoom ? q(".zoom_current") : q(".current"),
       absolute: true,
       duration: 0.75,
       ease: "expo.inOut",
@@ -77,7 +68,9 @@ const Slides = ({
   return (
     <div
       ref={slidesWrapperRef}
-      className={`${styles.slides_wrapper} ${zoom ? styles.zoomed : ""}`}
+      className={`${styles.slides_wrapper} ${
+        zoom ? styles.zoomed : ""
+      } slides_wrapper`}
     >
       {background === "photo" ? (
         <div
@@ -100,7 +93,9 @@ const Slides = ({
         >
           <GatsbyImage
             image={images[images.length - 1].image.asset.gatsbyImageData}
-            alt={images[images.length - 1].client}
+            alt={
+              images[images.length - 1].client || "Lauren Bamford Photography"
+            }
           />
         </div>
       ) : null}
@@ -125,24 +120,14 @@ const Slides = ({
                   : ""
               }`}
               onClick={index === current ? () => handleZoom() : null}
-              // onMouseOver={
-              //   index === current
-              //     ? () =>
-              //         dispatch({
-              //           type: ACTIONS.UPDATE_CURSOR,
-              //           payload: {
-              //             cursorContent: `${zoom === false ? `ZOOM` : `CLOSE`}`,
-              //           },
-              //         })
-              //     : null
-              // }
               key={node.image.asset.assetId}
-              style={getImageStyles(node.image, current, index, zoom)}
+              style={getImageStyles(node.image, current, index)}
               data-flip-id={node.image.asset.assetId}
+              data-cursor-content={"ZOOM"}
             >
               <GatsbyImage
                 image={node.image.asset.gatsbyImageData}
-                alt={node.client}
+                alt={node.client || "Lauren Bamford Photography"}
                 loading={"lazy"}
               />
             </div>
@@ -173,7 +158,30 @@ const Slides = ({
         >
           <GatsbyImage
             image={images[0].image.asset.gatsbyImageData}
-            alt={images[0].client}
+            alt={images[0].client || "Lauren Bamford Photography"}
+          />
+        </div>
+      ) : null}
+      {zoom ? (
+        <div
+          className={`${styles.slide_wrapper} zoom_current`}
+          data-flip-id={`${images[current].image.asset.assetId}`}
+          data-cursor-content={"CLOSE"}
+          onClick={() => handleZoom()}
+          style={{
+            minWidth: `calc(100vh * (${images[current].image.asset.width} / ${images[current].image.asset.height})`,
+            height: "100%",
+            top: 0,
+            left: 0,
+            zIndex: 100,
+            overflowY: "scroll",
+            scrollbarWidth: "none",
+            display: zoom ? "block" : "none",
+          }}
+        >
+          <GatsbyImage
+            image={images[current].image.asset.gatsbyImageData}
+            alt={images[current].client || "Lauren Bamford Photography"}
           />
         </div>
       ) : null}
@@ -187,22 +195,12 @@ const Slides = ({
         <button
           className={`${styles.button} ${styles.prev_button}`}
           onClick={() => handlePrev()}
-          // onMouseEnter={() =>
-          //   dispatch({
-          //     type: ACTIONS.UPDATE_CURSOR,
-          //     payload: { cursorContent: `${current} / ${images.length - 1}` },
-          //   })
-          // }
+          data-cursor-content={"PREVIOUS"}
         ></button>
         <button
           className={`${styles.button} ${styles.next_button}`}
           onClick={() => handleNext()}
-          // onMouseEnter={() =>
-          //   dispatch({
-          //     type: ACTIONS.UPDATE_CURSOR,
-          //     payload: { cursorContent: `${current} / ${images.length - 1}` },
-          //   })
-          // }
+          data-cursor-content={"NEXT"}
         ></button>
       </div>
     </div>

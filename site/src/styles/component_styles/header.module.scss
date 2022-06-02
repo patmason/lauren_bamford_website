@@ -2,8 +2,8 @@
   // background-color: lightcoral;
   position: fixed;
   top: 0;
-  width: calc(100% - (var(--nav_padding) * 2));
-  padding: var(--nav_padding) var(--nav_padding) 0 var(--nav_padding);
+  width: 100%;
+  padding: var(--nav_padding);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -25,5 +25,9 @@
 @media (max-width: var(--mobile)), (orientation: portrait) {
   .header_item {
     width: calc(50% - 1em);
+  }
+
+  .right_align {
+    text-align: right;
   }
 }

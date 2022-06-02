@@ -1,13 +1,13 @@
-.cursor,
-.cursor_content {
-  pointer-events: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 1;
-  z-index: 10000;
-}
+// .cursor,
+// .cursor_content {
+//   pointer-events: none;
+//   position: fixed;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   opacity: 1;
+//   z-index: 10000;
+// }
 
 .cursor {
   width: 8px;
@@ -17,9 +17,15 @@
 }
 
 .cursor_content {
-  background-color: rgb(197, 246, 62);
+  background-color: rgba(255, 255, 255, 0.84);
   padding: 0.3em;
-  border-radius: 0.3em;
   width: max-content;
-  transition: width 0.3s ease-in-out;
+  color: rgb(0, 0, 0);
+}
+
+//Mobile styles
+@media (max-width: var(--mobile)), (orientation: portrait) {
+  .cursor_content {
+    display: none;
+  }
 }
