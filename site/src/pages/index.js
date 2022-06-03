@@ -261,7 +261,6 @@ const IndexPage = () => {
         }`}
         ref={appRef}
       >
-        {/* <Cursor content={state.cursorContent} /> */}
         {!state.intro ? (
           <Header
             handleViewChange={handleViewChange}

@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `Lauren Bamford Photography Portfolio`,
-    description: `Lauren Bamford Photography Portfolio Website`,
+    title: `Lauren Bamford Photography`,
+    description: `Lauren Bamford Photography Website`,
     author: `Lauren Bamford`,
     siteUrl: `https://www.laurenbamford.com/`,
   },
@@ -35,6 +35,14 @@ module.exports = {
     {
       resolve: "gatsby-source-sanity",
       options: {
+        projectId: "j66was7c",
+        dataset: "production",
+      },
+    },
+    {
+      resolve: "gatsby-plugin-sanity-image",
+      options: {
+        // Sanity project info (required)
         projectId: "j66was7c",
         dataset: "production",
       },

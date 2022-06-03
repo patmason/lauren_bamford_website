@@ -25,7 +25,7 @@
   grid-template-columns: repeat(auto-fit, minmax(50px, 300px));
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   height: 100%;
-  // width: 100%;
+  width: 100%;
   padding: 2rem var(--nav_padding);
   grid-gap: 2em;
   overflow-y: scroll;
