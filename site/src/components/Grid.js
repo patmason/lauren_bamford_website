@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, useRef, useEffect } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { gsap } from "gsap"
 import { Flip } from "gsap/Flip"
@@ -73,6 +73,7 @@ const Grid = ({ images, current, dispatch, ACTIONS, background }) => {
               setIsSelected(true)
               setSelectedImage(index)
             }}
+            role={"presentation"}
           >
             <GatsbyImage
               image={node.image.asset.gatsbyImageData}
@@ -90,7 +91,6 @@ const Grid = ({ images, current, dispatch, ACTIONS, background }) => {
       ></div>
       <div className={styles.grid_bg_image_wrapper}>
         <div
-          className={styles.grid_bg_image}
           style={{
             minWidth: `calc(100vh * (${bg_image.image.asset.width} / ${bg_image.image.asset.height})`,
           }}

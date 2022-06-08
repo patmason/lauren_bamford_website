@@ -1,14 +1,7 @@
-import React, {
-  useState,
-  useRef,
-  useLayoutEffect,
-  useEffect,
-  useReducer,
-} from "react"
+import React, { useRef, useLayoutEffect, useEffect, useReducer } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { gsap } from "gsap"
 import { Flip } from "gsap/Flip"
-import { Transition } from "react-transition-group"
 
 //Components
 import Seo from "../components/seo"
@@ -21,7 +14,7 @@ import Info from "../components/Info"
 import Cursor from "../components/Cursor"
 
 //styles
-import * as styles from "../styles/component_styles/index.module.scss"
+// import * as styles from "../styles/component_styles/index.module.scss"
 
 gsap.registerPlugin(Flip)
 
@@ -46,7 +39,6 @@ const ACTIONS = {
   CHANGE_BACKGROUND: "change_background",
   TOGGLE_INFO: "toggle_info",
   TOGGLE_IMAGE_DETAILS: "toggle_image_details",
-  UPDATE_CURSOR: "update_cursor",
 }
 
 function reducer(state, action) {
@@ -111,16 +103,13 @@ function reducer(state, action) {
         showInfo: false,
         showImageDetails: !state.showImageDetails,
       }
-    case ACTIONS.UPDATE_CURSOR:
-      return {
-        ...state,
-        cursorContent: action.payload.cursorContent,
-      }
+    default:
+      console.log("something went wrong in reducer")
   }
 }
 
 const IndexPage = () => {
-  console.log("render")
+  // console.log("render")
   const data = useStaticQuery(graphql`
     {
       allSanityPhoto(sort: { fields: order, order: ASC }) {
@@ -164,7 +153,6 @@ const IndexPage = () => {
     background: "photo",
     showInfo: false,
     showImageDetails: false,
-    cursorContent: "FOO",
   }
   const [state, dispatch] = useReducer(reducer, initialState)
 
@@ -208,6 +196,28 @@ const IndexPage = () => {
   }
 
   //Effects
+  //credit useEffect
+  useEffect(() => {
+    console.log(`
+           _____
+        _.'_____'._
+      .'.-'  R  '-.'.
+     /.' T       I '.\\
+    // A       /   C \\\\
+   ::         /       ::
+   || P  ----O      K ||
+   ::                 ::
+    \\\\ M           N //
+     \\'. A       O .'/
+      '.'-.__S__.-'.'
+        '-._____.-'
+
+ DESIGN AND DEVELOPMENT BY:
+https://patrickmason.studio/
+
+`)
+  }, [])
+
   useEffect(() => {
     // Slides loop logic
     if (state.current === state.images.length) {
@@ -232,7 +242,7 @@ const IndexPage = () => {
           state.current === state.images.length &&
           state.previous === state.images.length - 1
         ) {
-          console.log("loop next")
+          // console.log("loop next")
           handleNext()
         }
       },
@@ -242,7 +252,7 @@ const IndexPage = () => {
   //View change effect
   useLayoutEffect(() => {
     if (!state.flipState) return
-    console.log("view change")
+    // console.log("view change")
     Flip.from(state.flipState, {
       targets:
         state.view === "slides" ? q(".current_slide") : q(".grid_current"),
@@ -256,7 +266,7 @@ const IndexPage = () => {
     <>
       <Seo title="Home" />
       <div
-        className={`${styles.app_wrapper} ${
+        className={`${
           state.showInfo || state.showImageDetails ? "app_wrapper_info" : ""
         }`}
         ref={appRef}

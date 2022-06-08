@@ -51,7 +51,7 @@ const Info = ({
             <br />
             {info.agents.map((agent, index) => {
               return (
-                <span className={styles.agents} key={index}>
+                <span key={index}>
                   <a
                     href={agent.agentLink}
                     target="_blank"
@@ -66,7 +66,7 @@ const Info = ({
         </span>
         <span className={styles.info_item}>
           <h2 className={styles.info_heading}>SELECT CLIENTS</h2>
-          <ul className={styles.client_list}>
+          <ul>
             {info.selectClients.map((client, index) => {
               return <li key={index}>{client}</li>
             })}

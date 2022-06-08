@@ -6,7 +6,7 @@ import * as styles from "../styles/component_styles/footer.module.scss"
 
 const Footer = ({ background, dispatch, ACTIONS }) => {
   const footerRef = useRef(null)
-  const q = gsap.utils.selector(footerRef)
+  // const q = gsap.utils.selector(footerRef)
   useLayoutEffect(() => {
     gsap.from(footerRef.current, {
       opacity: 0,
