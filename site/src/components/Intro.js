@@ -96,7 +96,7 @@ const Intro = ({ intro, images, current, dispatch, ACTIONS }) => {
             }
             alt={
               images[current === 0 ? images.length - 1 : current - 1].client ||
-              "Lauren Bamford Photography"
+              "Lauren Bamford Photographer"
             }
           />
         </div>
