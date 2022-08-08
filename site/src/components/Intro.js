@@ -133,7 +133,7 @@ const Intro = ({ intro, images, current, dispatch, ACTIONS }) => {
           <h1>Lauren Bamford</h1>
         </span>
         <span className={`${styles.intro_header_item} second_item`}>
-          <h2>photography</h2>
+          <h2>Photographer</h2>
         </span>
         <span className={styles.intro_header_item}></span>
         <span className={styles.intro_header_item}></span>
