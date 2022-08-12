@@ -57,7 +57,9 @@ const Info = ({
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {`${agent.agentRegion.toUpperCase()}: ${agent.agentContact.toLowerCase()}`}
+                    {`${agent.agentRegion.toUpperCase()}:`}
+                    <br />
+                    {`${agent.agentContact.toLowerCase()}`}
                   </a>
                 </span>
               )
@@ -71,6 +73,16 @@ const Info = ({
               return <li key={index}>{client}</li>
             })}
           </ul>
+          <div>
+            WEBSITE BY: <br />{" "}
+            <a
+              href="https://patrickmason.studio/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Patrick Mason
+            </a>
+          </div>
         </span>
         <span className={`${styles.info_item} ${styles.close_button}`}>
           <button
