@@ -47,7 +47,7 @@ const Info = ({
               </a>
             </span>
             <br />
-            <span>For commercial enquiries please contact:</span>
+            <span>For commercial enquiries in Europe please contact:</span>
             <br />
             {info.agents.map((agent, index) => {
               return (
@@ -57,8 +57,8 @@ const Info = ({
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {`${agent.agentRegion.toUpperCase()}:`}
-                    <br />
+                    {/* {`${agent.agentRegion.toUpperCase()}:`} */}
+                    {/* <br /> */}
                     {`${agent.agentContact.toLowerCase()}`}
                   </a>
                 </span>
