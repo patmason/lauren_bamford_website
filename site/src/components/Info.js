@@ -64,6 +64,18 @@ const Info = ({
                 </span>
               )
             })}
+            <br />
+            <span>For commercial enquiries in the USA please contact:</span>
+            <br />
+            <span key={index}>
+              <a
+                href="rebecca@supervisionnewyork.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                rebecca@supervisionnewyork.com
+              </a>
+            </span>
           </div>
         </span>
         <span className={styles.info_item}>
