@@ -69,7 +69,7 @@ const Info = ({
             <br />
             <span>
               <a
-                href="rebecca@supervisionnewyork.com"
+                href="https://supervisionnewyork.com/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
